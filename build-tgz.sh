@@ -15,7 +15,7 @@ for lcv in $(git submodule | cut -f2 -d" ");do
 done
 
 # Create the tarball
-tar --transform "s,^,blender-${VERSION}/,g" -zcvf $TARBALL -T $MANIFEST
+tar --transform "s,^,blender-${VERSION}/,g" -zcf $TARBALL -T $MANIFEST
 
 # Cleanup
 rm $MANIFEST
