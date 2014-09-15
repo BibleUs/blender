@@ -17,5 +17,8 @@ done
 # Create the tarball
 tar --transform "s,^,blender-${VERSION}/,g" -zcf $TARBALL -T $MANIFEST
 
+# Create checksum file
+md5sum ${TARBALL} | sed 's#/tmp/##' > ${TARBALL}.md5sum
+
 # Cleanup
 rm $MANIFEST
