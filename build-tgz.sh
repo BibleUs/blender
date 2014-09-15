@@ -1,8 +1,8 @@
 #!/bin/sh
 
-VERSION="blender-2.71"
-MANIFEST="/tmp/${VERSION}-manifest.txt"
-TARBALL="/tmp/${VERSION}.tar.gz"
+VERSION=$(grep "BLENDER_VERSION\s" ./source/blender/blenkernel/BKE_blender.h | awk '{print $3}')
+MANIFEST="/tmp/blender-${VERSION}-manifest.txt"
+TARBALL="/tmp/blender-${VERSION}.tar.gz"
 
 # Build master list
 git ls-files > $MANIFEST
@@ -15,7 +15,7 @@ for lcv in $(git submodule | cut -f2 -d" ");do
 done
 
 # Create the tarball
-tar --transform "s,^,${VERSION}/,g" -zcvf $TARBALL -T $MANIFEST
+tar --transform "s,^,blender-${VERSION}/,g" -zcvf $TARBALL -T $MANIFEST
 
 # Cleanup
 rm $MANIFEST
