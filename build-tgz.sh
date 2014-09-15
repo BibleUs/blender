@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=$(grep "BLENDER_VERSION\s" ./source/blender/blenkernel/BKE_blender.h | awk '{print $3}' | sed 's/\(.\)\(.\)/\1.\2/')
+VERSION="v$(grep "BLENDER_VERSION\s" ./source/blender/blenkernel/BKE_blender.h | awk '{print $3}' | sed 's/\(.\)\(.\)/\1.\2/')"
 MANIFEST="/tmp/blender-${VERSION}-manifest.txt"
 TARBALL="/tmp/blender-${VERSION}.tar.gz"
 
