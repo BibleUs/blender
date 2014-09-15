@@ -5,6 +5,7 @@ MANIFEST="/tmp/blender-${VERSION}-manifest.txt"
 TARBALL="/tmp/blender-${VERSION}.tar.gz"
 
 # Build master list
+echo "Building manifest of files..."
 git ls-files > $MANIFEST
 
 # Enumerate submodules
@@ -15,10 +16,19 @@ for lcv in $(git submodule | cut -f2 -d" ");do
 done
 
 # Create the tarball
+echo -n "Creating ${TARBALL}..."
 tar --transform "s,^,blender-${VERSION}/,g" -zcf $TARBALL -T $MANIFEST
+echo "OK"
 
 # Create checksum file
+echo -n "Createing ${TARBALL}.md5sum..."
 md5sum ${TARBALL} | sed 's#/tmp/##' > ${TARBALL}.md5sum
+echo "OK"
 
 # Cleanup
+echo -n "Cleaning up..."
 rm $MANIFEST
+echo "OK"
+
+echo "Done!"
+echo "Your files are in /tmp"
