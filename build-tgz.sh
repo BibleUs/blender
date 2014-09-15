@@ -10,7 +10,7 @@ git ls-files > $MANIFEST
 
 # Enumerate submodules
 for lcv in $(git submodule | cut -f2 -d" ");do
-	cd "$lcv" > /dev/null;
+	cd "$lcv";
 	git ls-files | sed -n "s/^\(.*\)$/$lcv\/\1/g" 2>/dev/null >> $MANIFEST
 	cd - > /dev/null;
 done
